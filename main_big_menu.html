@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" >
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <link rel="stylesheet" type="text/css" href="_css/main_big_menu.css">
 <title>Desolve Main</title>
 </head>
@@ -159,6 +159,18 @@ $(window).resize(function(){
 });
 //handle menus for small screens
 function smMenu(){
+	
+	//unbind click and touch events
+	$('menuTogle a').off('click');
+	$('.topMenu h3').off('click touchstart');
+	$('html').off('touchstart');
+	$('#mainNav').off('touchstart');
+	$('.topMenu h3').find('.indicator').remove();
+	//reset the menu in case it's being resized from medium screen
+	//remove any expended menus
+	$('.expand').removeClass('expand');
+	$('.menuToggle').remove();
+	// menu was reset - after we are creating new menu toggle
 	$(".topMenu").before('<div class="menuToggle"><a href="#">menu<span class="indicator">+</span></a></div>');
 	
 	$(".topMenu h3").append('<span class="indicator">+</span>');
@@ -168,6 +180,20 @@ function smMenu(){
 		
 		var newValue = ($(this).find('span.indicator').text() == '+') ? '-' : '+';
 		$(this).find('span.indicator').text(newValue);	
+	});//click
+	
+	$(".topMenu h3").click(function(){
+		//find submenu
+		var currentItem = $(this).siblings('.submenu');
+		//remove class expand from otetrs submenus
+		$('ul.submenu').not(currentItem).removeClass('expand');
+		$('.topMenu h3').not(this).find("span.indicator:contains('-')").text('+');
+		//open selected submenu
+		$(this).siblings('ul.submenu').toggleClass('expand');
+		//change submenu indicator
+		var newValue = ($(this).find('span.indicator').text() == '+')? '-' : '+';
+		$(this).find('span.indicator').text(newValue);
+			
 	});
 	
 	windowState = 'small';
@@ -175,11 +201,55 @@ function smMenu(){
 
 //handle menus for medium screens
 function medMenu(){
+	
+	//unbind click and touch events
+	$('menuToggle a').off('click');
+	$('.topMenu h3').off('click');
+	
+	$('.topMenu h3').find('.indicator').remove();
+	//reset the menu in case it's being resized from medium screen
+	//remove any expended menus
+	$('.expand').removeClass('expand');
+	$('.menuToggle').remove();
+	
+	if('ontouchstart' in document.documentElement){
+		$('.topMenu').find('li.hover').removeClass('hover');
+		//adding touch event
+		$('.topMenu h3').bind('touchstart',function(e){
+			var currentItem = $(this).siblings('.submenu');
+			
+			$('ul.submenu').not(currentItem).removeClass('expand');
+			
+			$(this).siblings('.submenu').toggleClass('expand');	
+		});
+		
+		$('html').bind('touchstart',function(e){
+			$('.topMenu').find('ul.submenu').removeClass('expand');
+		});
+		
+		$('#mainNav').bind('touchstart', function(e){
+			e.stopPropagation();	
+		});
+	}
+	
+	
 	windowState = 'medium';
 }//medMenu
 
 //hadle menu for large screens
 function lgMenu(){
+	//unbind click and touch events
+	$('menuTogle a').off('click');
+	$('.topMenu h3').off('click touchstart');
+	$('html').off('touchstart');
+	$('#mainNav').off('touchstart');
+	
+	$('.topMenu h3').find('ul.submenu').removeClass('expand');
+	//removing indicators 
+	$('.topMenu h3').find('.indicator').remove();
+	//remove menu toggle
+	$('.menuToggle').remove();
+	
 	windowState = 'large';
 }
 

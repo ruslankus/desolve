@@ -177,20 +177,6 @@ header a:hover {
 }
 
 /*nav styles*/
-.topMenu {
-	max-height:0;
-	visibility:hidden;}
-
-.topMenu.expand {
-	max-height:900em;
-	visibility:visible;}
-	
-#mainNav .menuToggle {
-	display: block;
-	background: rgb(76, 67, 65);
-	width: 8em;
-	margin-bottom: .2em;
-	position: relative;}	
 	
 #mainNav span.indicator {
     position: absolute;
@@ -483,6 +469,22 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', end
 		overflow:hidden;
 		background-color:white;}
 		
+	.topMenu {
+		max-height:0;
+		visibility:hidden;}
+	
+	.topMenu.expand {
+		max-height:900em;
+		visibility:visible;}
+		
+	#mainNav .menuToggle {
+		display: block;
+		background: rgb(76, 67, 65);
+		width: 8em;
+		margin-bottom: .2em;
+		position: relative;}	
+		
+		
 	#mainNav li {
 		float:none;
 		margin:0;
@@ -515,12 +517,21 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', end
 		overflow:hidden;
 		transition:max-height 0.5s ease 0s;
 		width:auto;}
+		
+	#mainNav ul.submenu.expand {
+		max-height:20em;}
 			
+	#mainNav ul.submenu li a  {
+		background-color:rgb(100,98,102);
+		font-size:1em;
+		padding:.2em 1em .2em 3em;
+		text-align:left;
+		white-space:nowrap;}
 		
 	#mainNav a em {
 		display:none;}
 		
-	a.gallery {
+/*	a.gallery {
 		background:url(../_images/icon_sprites_50.png) no-repeat center 25px;}			
 					
 	a.gear {
@@ -531,7 +542,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', end
 		
 	a.shop {
 		background:url(../_images/icon_sprites_50.png) no-repeat center -578px;}	
-			
+*/			
 		
 /* mission styles */
 	.mission {
@@ -633,24 +644,64 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', end
 		
 /*nav styles */
 	#mainNav {
+		width:100%;
+		margin-bottom:1em;
+		padding-bottom:0;
+		font-size:90%;}
+		
+	#mainNav a, #mainNav h3 {
+		cursor: pointer;
+		font-size: 1em;
+		text-align: center;
+		display:block;
+		text-transform:uppercase;}	
+		
+	.topMenu {
 		width:450px;
 		margin:0 auto;}
 		
-	#mainNav li {
-		margin-right:10%}	
+	#mainNav .topMenu li {
+		float:left;
+		width:auto;
+		position:relative;
+		margin-right:5%}	
 	
-	#mainNav li:last-child {
+	#mainNav .topMenu li:last-child {
 		margin-right: 0;}
+		
+	#mainNav ul.submenu {
+		float:none;
+		height:auto;
+		position:absolute;
+		padding-top:1.1em;
+		max-height:0;
+		transition:max-height 0.5s ease 0s;
+		overflow:hidden;
+		z-index:1000;}
+		
+	#mainNav li.hover:hover ul, #mainNav ul.submenu.expand {
+		max-height:20em;}
 	
-	#mainNav a {
-		font-size:1.2em;
-		text-align:center;
-		padding-bottom:40px;}
+	#mainNav ul.submenu > li {
+		background-color:rgba(76,67,65,0.8);
+		margin:0;
+		float:none;}
+
+	#mainNav ul.submenu > li > a {
+		border-bottom:1px solid white;
+		color:white;
+		font-size:1.1em;
+		padding:0.2em 1em;
+		text-align:left;
+		white-space:nowrap;}
+		
+	#mainNav ul.submenu > li:last-child > a {
+		border-bottom:none;}
 		
 	#mainNav a em {
 		display:none;}
 		
-	a.gallery {
+/*	a.gallery {
 		background:url(../_images/icon_sprites_25.png) no-repeat center 30px;}			
 					
 	a.gear {
@@ -661,7 +712,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', end
 		
 	a.shop {
 		background:url(../_images/icon_sprites_25.png) no-repeat center -270px;}	
-			
+*/			
 /* mission styles */
 	.mission {
 		padding-left:3.9%;
